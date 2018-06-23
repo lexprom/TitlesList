@@ -12,12 +12,10 @@ class App extends React.Component {
                 <Header />
                 <Search />
                 <ul className={styles.ul}>
-                    <Title />
-                    <Title />
-                    <Title />
-                    <Title />
-                    <Title />
-                    <Title />
+                    <Title index={0} />
+                    <Title index={1} />
+                    <Title index={2} />
+                    <Title index={3} />
                 </ul>
                 <Footer />
             </div>
