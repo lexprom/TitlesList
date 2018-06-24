@@ -5,17 +5,30 @@ import Search from '../SearchBar';
 import Title from '../Title';
 import Footer from '../Footer';
 
+import { observer, inject } from 'mobx-react';
+
+@inject('titleStore')
+@observer
 class App extends React.Component {
+
+    allTitlesPlaces = () => {
+        const count = this.props.titleStore.getCount;
+        let all = [];
+        for (let i = 0; i < count; i++) {
+            all.push(<Title key={i} index={i} />);
+        }
+        return all;
+        all = [];
+    }
+
     render() {
+        const { titleStore } = this.props;
         return (
             <div className="App">
                 <Header />
                 <Search />
                 <ul className={styles.ul}>
-                    <Title index={0} />
-                    <Title index={1} />
-                    <Title index={2} />
-                    <Title index={3} />
+                    {this.allTitlesPlaces()}
                 </ul>
                 <Footer />
             </div>

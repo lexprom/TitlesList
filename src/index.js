@@ -9,4 +9,5 @@ const app =
     <Provider titleStore={TitleStore}>
         <App />
     </Provider>;
+    
 ReactDOM.render(app, document.getElementById('root'));
