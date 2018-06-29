@@ -5,17 +5,21 @@ import Search from '../SearchBar';
 import Title from '../Title';
 import Footer from '../Footer';
 
+import {observer,inject} from 'mobx-react';
+
+@inject('titleStore')
+@observer
 class App extends React.Component {
     render() {
+        const { titleStore } = this.props;
         return (
             <div className="App">
                 <Header />
                 <Search />
                 <ul className={styles.ul}>
-                    <Title index={0} />
-                    <Title index={1} />
-                    <Title index={2} />
-                    <Title index={3} />
+                    {titleStore.titles.map( title =>
+                       <Title element = {title} key = {title.id}/>
+                    )}
                 </ul>
                 <Footer />
             </div>
