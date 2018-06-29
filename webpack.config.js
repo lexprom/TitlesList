@@ -21,9 +21,9 @@ module.exports = {
             {
                 test: /.css$/,
                 use: [
-                    require.resolve('style-loader'),
+                    'style-loader',
                     {
-                        loader: require.resolve('css-loader'),
+                        loader: 'css-loader',
                         options: {
                             importLoaders: 1,
                             modules: true
@@ -35,14 +35,6 @@ module.exports = {
                 test: /\.svg$/,
                 exclude: /node_modules/,
                 use: ['svg-react-loader']
-            },
-            {
-                test: /\.(pdf|jpg|png|gif|svg|ico)$/,
-                use: [
-                    {
-                        loader: 'url-loader'
-                    },
-                ]
             }
         ]
     }
