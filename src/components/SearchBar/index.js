@@ -7,13 +7,11 @@ import { observer, inject } from 'mobx-react';
 @observer
 class SearchBar extends React.Component {
     onClick = () => {
-        const inputText = this.props.titleStore.inputValue;
-        this.props.titleStore.fetchTitles(inputText);
-        this.props.titleStore.inputValue = '';
+        this.props.titleStore.fetchTitles();
     }
 
     handleChange = (e) => {
-        this.props.titleStore.inputValue = e.target.value;
+        this.props.titleStore.setInput(e.target.value);
     }
 
     render() {
