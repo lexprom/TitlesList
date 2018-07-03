@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles.module.css';
+import { Form, Input, Button } from './styles.module.js';
 
 import { observer, inject } from 'mobx-react';
 
@@ -7,20 +7,22 @@ import { observer, inject } from 'mobx-react';
 @observer
 class SearchBar extends React.Component {
     onClick = () => {
-        this.props.titleStore.fetchTitles();
+        const inputText = this.props.titleStore.inputValue;
+        this.props.titleStore.fetchTitles(inputText);
+        this.props.titleStore.inputValue = '';
     }
 
     handleChange = (e) => {
-        this.props.titleStore.setInput(e.target.value);
+        this.props.titleStore.inputValue = e.target.value;
     }
 
     render() {
         const { titleStore } = this.props;
         return (
-            <form className={styles.form}>
-                <input className={styles.input} placeholder="Search" value={titleStore.inputValue} onChange={this.handleChange} />
-                <button type="button" disabled={!titleStore.inputValue} onClick={this.onClick} className={styles.button}>Go</button>
-            </form>
+            <Form>
+                <Input placeholder="Search" value={titleStore.inputValue} onChange={this.handleChange} />
+                <Button type="button" disabled={!titleStore.inputValue} onClick={this.onClick}>Go</Button>
+            </Form>
         )
     }
 }

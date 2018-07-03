@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './styles.module.css';
+import { Text, Background } from './styles.module.js';
 
 class Header extends React.Component {
     render() {
         return (
-            <header className={styles.header}>
-                <p className={styles.text}>Header</p>
-            </header>
+            <Background>
+                <Text>Header</Text>
+            </Background>
         )
     }
 }

@@ -1,25 +1,30 @@
 import { observable, action, computed, runInAction } from 'mobx';
-import Title from './Title';
 import 'babel-polyfill';
 
-class TitlesStore {
+class Title {
+    id = Math.random();
+    @observable title;
+    @observable place;
+
+    constructor(title, place) {
+        this.title = title;
+        this.place = place;
+    }
+}
+
+class TitleStore {
     @observable titles = [];
     @observable inputValue = '';
     @observable state = 'pending';
 
-    
-    @action setInput(text) {
-        this.inputValue = text;
-    }
-
-    @action async fetchTitles() {
-        this.titles.clear();
+    @action async fetchTitles(city) {
+        this.titles = [];
         this.state = 'pending';
-        const url = `https://chroniclingamerica.loc.gov/search/titles/results/?terms=${this.inputValue}&format=json&page=1`
+        const url = `https://chroniclingamerica.loc.gov/search/titles/results/?terms=${city}&format=json&page=1`
         try {
             const rawItems = await fetch(url);
-            const jsonItems = await (await rawItems.json());
-            let filteredTitles = jsonItems.items.map(item => new Title(item.title, item.place_of_publication));
+            const jsonItems = await rawItems.json();
+            let filteredTitles = Object.keys(jsonItems.items).map(id => new Title(jsonItems.items[id].publisher, jsonItems.items[id].place_of_publication));
             runInAction(() => {
                 this.titles = filteredTitles;
                 this.state = 'done';
@@ -30,9 +35,8 @@ class TitlesStore {
                 this.state = "error";
             })
         }
-        this.inputValue = '';
     }
 }
 
-const store = new TitlesStore();
+const store = new TitleStore();
 export default store;

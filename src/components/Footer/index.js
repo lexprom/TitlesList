@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './styles.module.css';
+import { Text, Background } from './styles.module.js';
 
 class Footer extends React.Component {
-    render () {
-        return ( 
-            <footer className={styles.footer}>
-                <p className ={styles.text}>Sticky Footer</p>
-            </footer>
+    render() {
+        return (
+            <Background>
+                <Text>Sticky Footer</Text>
+            </Background>
         )
     }
 }
