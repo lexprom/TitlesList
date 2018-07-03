@@ -6,10 +6,11 @@ import { inject, observer } from 'mobx-react';
 @observer
 class Title extends React.Component {
     render() {
+        const {element} = this.props;
         return (
             <li className={styles.li}>
-                <p className={styles.title}>{this.props.element.title}</p>
-                <p className={styles.text}>{this.props.element.place}</p>
+                <p className={styles.title}>{element.title}</p>
+                <p className={styles.text}>{element.place}</p>
             </li>
         )
     }

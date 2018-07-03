@@ -5,7 +5,7 @@ import Search from '../SearchBar';
 import Title from '../Title';
 import Footer from '../Footer';
 
-import {observer,inject} from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
 @inject('titleStore')
 @observer
@@ -17,8 +17,8 @@ class App extends React.Component {
                 <Header />
                 <Search />
                 <ul className={styles.ul}>
-                    {titleStore.titles.map( title =>
-                       <Title element = {title} key = {title.id}/>
+                    {titleStore.titles.map(title =>
+                        <Title element={title} key={title.id} />
                     )}
                 </ul>
                 <Footer />

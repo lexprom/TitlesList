@@ -12,11 +12,11 @@ class Title {
 
 }
 
-class TitleStore {
+class TitlesStore {
    @observable titles = [];
 }
 
-const store = new TitleStore();
+const store = new TitlesStore();
 store.titles.push (
     new Title("Title 1","Place 1"),
     new Title("Title 2","Place 2"),
