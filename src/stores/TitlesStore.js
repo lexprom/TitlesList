@@ -12,31 +12,14 @@ class Title {
     }
 }
 
-class TitleStore {
-    @observable titles = [];
-    @observable inputValue = '';
-    @observable state = 'pending';
-
-    @action async fetchTitles(city) {
-        this.titles = [];
-        this.state = 'pending';
-        const url = `https://chroniclingamerica.loc.gov/search/titles/results/?terms=${city}&format=json&page=1`
-        try {
-            const rawItems = await fetch(url);
-            const jsonItems = await rawItems.json();
-            let filteredTitles = Object.keys(jsonItems.items).map(id => new Title(jsonItems.items[id].publisher, jsonItems.items[id].place_of_publication));
-            runInAction(() => {
-                this.titles = filteredTitles;
-                this.state = 'done';
-            });
-        }
-        catch (error) {
-            runInAction(() => {
-                this.state = "error";
-            })
-        }
-    }
+class TitlesStore {
+   @observable titles = [];
 }
 
-const store = new TitleStore();
+const store = new TitlesStore();
+store.titles.push (
+    new Title("Title 1","Place 1"),
+    new Title("Title 2","Place 2"),
+    new Title("Title 3","Place 3")
+);
 export default store;

@@ -5,7 +5,7 @@ import Search from '../SearchBar';
 import Title from '../Title';
 import Footer from '../Footer';
 
-import {observer,inject} from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
 @inject('titleStore')
 @observer
