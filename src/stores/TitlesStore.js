@@ -15,11 +15,12 @@ class TitlesStore {
     @action async fetchTitles() {
         this.titles.clear();
         this.state = 'pending';
-        const url = `https://chroniclingamerica.loc.gov/search/titles/results/?terms=${this.inputValue}&format=json&page=1`
+        const url = `http://localhost:4000/items?place=${this.inputValue}`;
         try {
             const rawItems = await fetch(url);
-            const jsonItems = await (await rawItems.json());
-            let filteredTitles = jsonItems.items.map(item => new Title(item.title, item.place_of_publication));
+            const jsonItems = await rawItems.json();
+            console.log(jsonItems);
+            let filteredTitles = jsonItems.map(item => new Title(item.title, item.place));
             runInAction(() => {
                 this.titles = filteredTitles;
                 this.state = 'done';
