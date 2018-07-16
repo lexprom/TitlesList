@@ -19,10 +19,9 @@ class TitlesStore {
         try {
             const rawItems = await fetch(url);
             const jsonItems = await rawItems.json();
-            console.log(jsonItems);
             let filteredTitles = jsonItems.map(item => new Title(item.title, item.place));
             runInAction(() => {
-                this.titles = filteredTitles;
+                this.titles = [...filteredTitles];
                 this.state = 'done';
             });
         }

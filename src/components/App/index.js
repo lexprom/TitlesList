@@ -19,7 +19,8 @@ class App extends React.Component {
                 <Ul>
                     {titleStore.titles.map(title =>
                         <Title element={title} key={title.id} />
-                              </Ul>
+                    )}
+                </Ul>
                 <Footer />
             </div>
         )
