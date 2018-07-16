@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button } from './styles.module.js';
+import { Form, Input, Button } from './styles.js';
 
 import { observer, inject } from 'mobx-react';
 

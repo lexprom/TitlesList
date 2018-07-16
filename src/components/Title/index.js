@@ -1,5 +1,5 @@
 import React from 'react';
-import { Block, Text, Place } from './styles.module.js';
+import { Block, Text, Place } from './styles.js';
 
 import { observer } from 'mobx-react';
 
