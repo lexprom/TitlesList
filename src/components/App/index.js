@@ -1,5 +1,5 @@
 import React from 'react';
-import { injectGlobal, Ul } from './styles.module.js';
+import { injectGlobal, Ul } from './styles.js';
 import Header from '../Header';
 import Search from '../SearchBar';
 import Title from '../Title';
@@ -19,8 +19,7 @@ class App extends React.Component {
                 <Ul>
                     {titleStore.titles.map(title =>
                         <Title element={title} key={title.id} />
-                    )}
-                </Ul>
+                              </Ul>
                 <Footer />
             </div>
         )
