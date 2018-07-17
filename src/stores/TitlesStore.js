@@ -1,41 +1,43 @@
-import {
-  observable, action, runInAction,
-} from 'mobx';
+import { runInAction } from 'mobx';
+import { types, flow } from 'mobx-state-tree';
 import Title from './Title';
 import 'babel-polyfill';
 
-class TitlesStore {
-    @observable titles = [];
-
-    @observable inputValue = '';
-
-    @observable state = 'pending';
-
-
-    @action setInput(text) {
-      this.inputValue = text;
-    }
-
-    @action async fetchTitles() {
-      this.titles.clear();
-      this.state = 'pending';
-      const url = `http://localhost:4000/items?place=${this.inputValue}`;
+const TitlesStore = types.model({
+  titles: types.array(Title),
+  inputValue: '',
+  state: 'pending',
+})
+  .actions(self => ({
+    setInput(text) {
+      const Self = self;// eslint no-param-reassign не стал добавлять правило
+      Self.inputValue = text;
+    },
+    fetchTitles: flow(function* fetchTitles() {
+      const Self = self;// eslint no-param-reassign
+      Self.titles.clear();
+      Self.state = 'pending';
+      const url = `http://localhost:4000/items?place=${Self.inputValue}`;
       try {
-        const rawItems = await fetch(url);
-        const jsonItems = await rawItems.json();
-        const filteredTitles = jsonItems.map(item => new Title(item.title, item.place));
+        const rawItems = yield fetch(url);
+        const jsonItems = yield rawItems.json();
+        const filteredTitles = jsonItems.map(item => Title.create(
+          { id: Math.random(), title: item.title, place: item.place },
+        ));
         runInAction(() => {
-          this.titles = [...filteredTitles];
-          this.state = 'done';
+          Self.titles = [...filteredTitles];
+          Self.state = 'done';
         });
       } catch (error) {
         runInAction(() => {
-          this.state = 'error';
+          Self.state = 'error';
         });
       }
-      this.inputValue = '';
-    }
-}
+      Self.inputValue = '';
+    }),
+  }
+  ));
 
-const store = new TitlesStore();
+
+const store = TitlesStore.create({});
 export default store;

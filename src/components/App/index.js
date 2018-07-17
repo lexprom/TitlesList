@@ -25,8 +25,4 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {
-  titleStore: PropTypes..isRequired,
-};
-
 export default App;
