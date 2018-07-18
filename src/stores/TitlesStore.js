@@ -10,30 +10,26 @@ const TitlesStore = types.model({
 })
   .actions(self => ({
     setInput(text) {
-      const Self = self;// eslint no-param-reassign не стал добавлять правило
-      Self.inputValue = text;
+      self.inputValue = text;
     },
     fetchTitles: flow(function* fetchTitles() {
-      const Self = self;// eslint no-param-reassign
-      Self.titles.clear();
-      Self.state = 'pending';
-      const url = `http://localhost:4000/items?place=${Self.inputValue}`;
+      self.titles.clear();
+      self.state = 'pending';
+      const url = `http://localhost:4000/items?place=${self.inputValue}`;
       try {
         const rawItems = yield fetch(url);
         const jsonItems = yield rawItems.json();
-        const filteredTitles = jsonItems.map(item => Title.create(
-          { id: Math.random(), title: item.title, place: item.place },
-        ));
+        const filteredTitles = jsonItems.map(item => ({ id: item.id, title: item.title, place: item.place }));
         runInAction(() => {
-          Self.titles = [...filteredTitles];
-          Self.state = 'done';
+          self.titles.replace(filteredTitles);
+          self.state = 'done';
         });
       } catch (error) {
         runInAction(() => {
-          Self.state = 'error';
+          self.state = 'error';
         });
       }
-      Self.inputValue = '';
+      self.inputValue = '';
     }),
   }
   ));
