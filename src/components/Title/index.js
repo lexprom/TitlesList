@@ -1,5 +1,5 @@
 import React from 'react';
-import { Block, Text, Place, MiddleShape, FirstSquare, SecondSquare } from './styles.module.js';
+import { Block, Text, Place, MiddleShape, FirstSquare, SecondSquare } from './styles.js';
 
 import { observer } from 'mobx-react';
 
