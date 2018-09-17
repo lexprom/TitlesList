@@ -1,5 +1,5 @@
 import React from 'react';
-import { Block, Text, Place } from './styles.js';
+import { Block, Text, Place, MiddleShape, FirstSquare, SecondSquare } from './styles.js';
 
 import { observer } from 'mobx-react';
 
@@ -10,6 +10,9 @@ class Title extends React.Component {
         return (
             <Block>
                 <Text>{element.title}</Text>
+                <FirstSquare />
+                <MiddleShape />
+                <SecondSquare />
                 <Place>{element.place}</Place>
             </Block>
         )
