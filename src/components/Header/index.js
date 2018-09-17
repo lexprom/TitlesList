@@ -1,14 +1,12 @@
 import React from 'react';
-import { Text, Background } from './styles.js';
+import { Text, Background } from './styles';
 
-class Header extends React.Component {
-    render() {
-        return (
-            <Background>
-                <Text>Header</Text>
-            </Background>
-        )
-    }
-}
+const Header = () => (
+  <Background>
+    <Text>
+      {'Header'}
+    </Text>
+  </Background>
+);
 
 export default Header;

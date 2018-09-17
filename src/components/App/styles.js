@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { injectGlobal } from 'styled-components'
+import styled, { injectGlobal } from 'styled-components';
 
 export const Ul = styled.ul` 
     min-height: calc(100vh - 370px);
@@ -7,7 +6,7 @@ export const Ul = styled.ul`
     margin-bottom: 8px;
 `;
 
-injectGlobal`
+export default injectGlobal`
     html,body {
         margin: 0;
         height: 100%;
