@@ -1,14 +1,9 @@
-import { observable } from 'mobx';
+import { types } from 'mobx-state-tree';
 
-export default class Title {
-    id = Math.random();
+const Title = types.model({
+  id: types.number,
+  title: types.string,
+  place: types.string,
+});
 
-    @observable title;
-
-    @observable place;
-
-    constructor(title, place) {
-      this.title = title;
-      this.place = place;
-    }
-}
+export default Title;
