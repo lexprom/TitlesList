@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './style.module.css';
-import Header from '../Header';
-import Search from '../SearchBar';
-import Title from '../Title';
-import Footer from '../Footer';
+import { injectGlobal, Ul } from './styles.js';
+import Header from '../Header/index.js';
+import Search from '../SearchBar/index.js';
+import Title from '../Title/index.js';
+import Footer from '../Footer/index.js';
 
 import { observer, inject } from 'mobx-react';
 
@@ -13,14 +13,14 @@ class App extends React.Component {
     render() {
         const { titleStore } = this.props;
         return (
-            <div className="App">
+            <div>
                 <Header />
                 <Search />
-                <ul className={styles.ul}>
+                <Ul>
                     {titleStore.titles.map(title =>
                         <Title element={title} key={title.id} />
                     )}
-                </ul>
+                </Ul>
                 <Footer />
             </div>
         )
